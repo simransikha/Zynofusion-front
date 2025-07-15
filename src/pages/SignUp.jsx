@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import InputFloating from '../components/InputFloating'; // Assumes it's a custom input
-import RoleSelector from '../components/RoleSelectors';  // Assumes role selection buttons
+import InputFloating from '../components/InputFloating'; // Custom styled input
+import RoleSelector from '../components/RoleSelectors';  // Custom role selection buttons
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +18,8 @@ export default function SignUp() {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleRoleSelect = (role) => setFormData({ ...formData, role });
+  const handleRoleSelect = (role) =>
+    setFormData({ ...formData, role });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,16 +33,16 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-blue-100 to-purple-100 px-4 py-8">
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md relative"
+        className="bg-white rounded-3xl shadow-2xl px-6 py-8 w-full max-w-lg relative transition-all duration-300"
       >
-        <h2 className="text-2xl font-bold text-center mb-6 text-blue-700">
-          Signup - Step {step}
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-8 text-blue-700">
+          Sign Up <span className="text-sm block text-gray-500">Step {step} of 3</span>
         </h2>
 
-        {/* Step 1: Name */}
+        {/* Step 1: Full Name */}
         {step === 1 && (
           <>
             <InputFloating
@@ -53,7 +54,7 @@ export default function SignUp() {
             />
             <button
               type="button"
-              className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition"
+              className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
               onClick={() => setStep(2)}
             >
               Next
@@ -61,7 +62,7 @@ export default function SignUp() {
           </>
         )}
 
-        {/* Step 2: Email and Password */}
+        {/* Step 2: Email & Password */}
         {step === 2 && (
           <>
             <InputFloating
@@ -80,55 +81,55 @@ export default function SignUp() {
               onChange={handleChange}
               required
             />
-            <div className="flex justify-between mt-4">
+            <div className="flex justify-between mt-6">
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="text-blue-600 hover:underline"
+                className="text-blue-600 hover:underline text-sm"
               >
-                Back
+                ← Back
               </button>
               <button
                 type="button"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition"
                 onClick={() => setStep(3)}
               >
-                Next
+                Next →
               </button>
             </div>
           </>
         )}
 
-        {/* Step 3: Role selection */}
+        {/* Step 3: Role Selector */}
         {step === 3 && (
           <>
             <RoleSelector selected={formData.role} onSelect={handleRoleSelect} />
-            <div className="flex justify-between mt-4">
+            <div className="flex justify-between mt-6">
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="text-blue-600 hover:underline"
+                className="text-blue-600 hover:underline text-sm"
               >
-                Back
+                ← Back
               </button>
               <button
                 type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md"
+                className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg transition"
               >
-                Submit
+                Submit ✅
               </button>
             </div>
           </>
         )}
 
-        {/* Success message overlay */}
+        {/* Success Overlay */}
         {showSuccess && (
-          <div className="absolute inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center text-center p-6 rounded-xl">
-            <div className="text-4xl mb-2 animate-bounce">✅</div>
+          <div className="absolute inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center text-center p-6 rounded-3xl z-10">
+            <div className="text-4xl mb-2 animate-bounce">🎉</div>
             <p className="text-green-600 text-lg font-semibold">
               Signup Successful!
             </p>
-            <p className="text-sm mt-2 text-gray-600">
+            <p className="text-sm mt-1 text-gray-500">
               Redirecting to Dashboard...
             </p>
           </div>
